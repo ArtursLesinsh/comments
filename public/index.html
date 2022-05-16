@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comments</title>
-    
-    <form action="">
-        <input type="text" name="author" placeholder="Name">
-        <textarea name="" id="" cols="30" rows="10" placeholder="Comment Message"></textarea>
-        <button type="submit">comment</button>
-    </form>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comments</title>
+<link rel="stylesheet" href="style.css">
 
-    <div class="comments">
-        <div class="comments__entry tempalate">
-            <p></p>
-        </div>
+<form action="" id="comments_form">
+    <input type="text" name="author" placeholder="Name">
+    <textarea name="message" id="" cols="30" rows="10" placeholder="Comment Message"></textarea>
+    <button type="submit">comment</button>
+</form>
+
+<div class="comments">
+    <div class="comments__entry template">
+        <p class="message"></p>
+        <strong class="author"></strong>
     </div>
+</div>
+
+<script src="script.js"></script>
+
+<!-- KODA STRUKTŪRA
+
+   BACKEND - SERVER
+API
+Drive
+todo_list
+
+  FRONTEND - BROWSER
+HTML elemets
+script
+elementEditor
+xhttp
+
+
+script -> API ... -> script ...
+
+
+API -> Drive -> todo_list
+todo_list -> Drive -> API
+
+HTML elements -> script -> elmentEditor
+                 script -> xhttph -->
