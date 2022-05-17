@@ -10,10 +10,14 @@ xhttp.get('api.php?name=get-comments', function (response) {
 
 form.onsubmit = function (event) {
     event.preventDefault();
-    xhttp.postForm(this, function (response) {
+    submitForm(this);
+};
+
+function submitForm (form) {
+    xhttp.postForm(form, function (response) {
         addComment(response.id, response.author, response.message);
     });
-};
+}
 
 function addComment(id, author, message) {
     const new_comment = comment_template.cloneNode(true);
@@ -31,5 +35,32 @@ function addComment(id, author, message) {
         });
     };
 
-    comment_block.append(new_comment)
+    comment_block.append(new_comment);
 }
+
+
+let alt_is_down = false;
+form.querySelector('textarea').onkeydown = function (event) {
+    if (event.key === 'Alt') {
+        alt_is_down = true;
+    }
+}
+form.querySelector('textarea').onkeyup = function (event) {
+    if (event.key === 'Alt') {
+        alt_is_down = false;
+    }
+    else if (event.key === 'Enter') {
+        if (alt_is_down === false) {
+            submitForm(form);
+        }
+        else {
+            this.value += '\n';
+        }
+    }
+};
+
+// form.querySelector('input').onkeydown = function (event) {
+//     if (event.key === 'Enter') {
+//         event.preventDefault();
+//     }
+// };
