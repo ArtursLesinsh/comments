@@ -6,7 +6,7 @@ const xhttp = {
     postForm: function (form, callback = false) {
         let url = form.getAttribute('action'),
             data = new FormData(form);
-
+    
         this.post(url, data, callback);
         form.reset();
     },
@@ -16,10 +16,9 @@ const xhttp = {
         xhttp.onload = function() {
             if (callback !== false) {
                 let response_object = JSON.parse(this.responseText);
-                if (response_object.status == true) {        
-                    callback(response_object);                  
+                if (response_object.status == true) {
+                    callback(response_object);
                 }
- 
             }
         };
         xhttp.open("POST", url);
