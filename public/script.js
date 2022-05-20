@@ -15,7 +15,7 @@ xhttp.get('api.php?name=getAll-comment', function (response) {
 
 xhttp.get('api.php?name=getAll-image', function (response) {
     for (let image of response.images) {
-        addBackgroundImage('../private/uploads/image_' + image.id + '.png');
+        addBackgroundImage('endpoint.php?name=png&id=' + image.id);
     }
 });
 
