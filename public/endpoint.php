@@ -11,8 +11,10 @@ if(isset($_GET['name']) && is_string($_GET['name'])) {
             if (file_exists($file_path)) {
                 header('Content-Type: image/png');
 
-                echo file_get_contents($file_path);
-                return;
+                if (file_exists($file_path)) {
+                    echo file_get_contents($file_path);
+                    return;
+                }
             }
         }
     }

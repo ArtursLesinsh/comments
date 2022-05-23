@@ -5,5 +5,4 @@ form.onsubmit = function(event) {
     xhttp.postForm(this, function (response) {
         console.log(response);
     });
-
 }
