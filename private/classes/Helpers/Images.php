@@ -27,32 +27,6 @@ class Images
     }
 
     /**
-     * validateData: {
-     *  Pārbauda vai ir saņemti atbilstoši dati,
-     *  atbilstošā formātā
-     * } un
-     * addToDB: {
-     *  pieveino faila nosaukumu un
-     *  autoru datubāzē
-     * } un
-     * saveFile:{
-     *  pagaidu faila satura nolasīšana un
-     *  ierakstīšana jaunizveidotajā failā
-     * } un
-     * output{
-     *  atgriež $output masīvu;
-     * }
-     * 
-     */
-
-    /*
-    validateData {
-        addToDB() -> saveFile() -> output()
-    }
-    output();
-    */
-
-    /**
      * Uploads image and saves data to DB
      * @return array ['status' => bool, ...]
      */
