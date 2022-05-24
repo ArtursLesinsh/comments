@@ -7,12 +7,17 @@ const comment_template = comment_block.querySelector('.template');
 const background_container = document.querySelector('.background_container');
 const image_template = background_container.querySelector('.template');
 
+/* Šitais pieprasijums atbild par komentaru pievenošanu WEB parluka */
 xhttp.get('api.php?object=comment&action=getAll', function (response) {
     for (let comment of response.comments) {
         addComment(comment.id, comment.author, comment.message);
     }
 });
+/* ↑ 
+Šie cikli izpildas atsevišķi viens no otra, un nekadigi neitekme viens otru darbu
+↓*/
 
+/* Šitais pieprasijums atbild par bildes pievenošanu musu mājas lapa */
 xhttp.get('api.php?object=image&action=getAll', function (response) {
     for (let image of response.images) {
         addBackgroundImage('endpoint.php?name=png&id=' + image.id);
