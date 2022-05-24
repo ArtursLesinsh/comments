@@ -8,16 +8,14 @@ if(isset($_GET['name']) && is_string($_GET['name'])) {
             $id = (int) $_GET['id'];
 
             $file_path = UPLOAD_DIR . "image_$id.png";
+            header('Content-Type: image/png');
             if (file_exists($file_path)) {
-                header('Content-Type: image/png');
-
-                if (file_exists($file_path)) {
-                    echo file_get_contents($file_path);
-                    return;
-                }
+                echo file_get_contents($file_path);
+                return;
+            }
+            else {
+                echo file_get_contents(PRIVATE_DIR . 'default_image.png');
             }
         }
     }
 }
-
-echo "wrong path";
