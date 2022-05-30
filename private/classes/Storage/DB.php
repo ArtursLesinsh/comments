@@ -6,6 +6,10 @@ class DB
     private $table_name = null;
     private $connection = null;
     private static $conn = null;
+    /*
+private static - обозначает, что эта $conn = null; (ценность, vertiba), будет привязанна не к обьекту, который делается из классов,
+а к конкретному классу. а из одного класса можно сделать несколько обьектов.
+    */
 
     public function __construct(string $table_name) {
         $this->table_name = $table_name;
@@ -39,15 +43,18 @@ class DB
         }
         return false;
     }
-
+/* Функция для отправки обнавленных данных в базу данных */
     public function updateEntry(int $id, array $entry) {
         $column_value_str = '';
         foreach ($entry as $key => $value) {
             $column_value_str .= ' ' . $key . "=" . "'" . self::$conn->real_escape_string($value) . "',";
         }
+/* Здесь мы из масcива,
+ foreach ($entry as $key => $value) получаем данные что ввели и приобразуем их*/
         $column_value_str = rtrim($column_value_str, ',');
 
         $sql = "UPDATE " . $this->table_name . " SET $column_value_str WHERE id=$id";
+/* Здесь уже получаем окончателл=ьный вариант текста, который будем отправлять на сервер */
 
         $result = self::$conn->query($sql);
         if ($result === true) {
@@ -65,12 +72,14 @@ class DB
         return false;
     }
 
+    /* функция для update function */
     public function getEntry(int $id) {
         $sql = "SELECT * FROM " . $this->table_name . " WHERE id=$id";
         $result = self::$conn->query($sql);
 
         if ($result !== false) {
             return $result->fetch_assoc();
+            //здесь мы получаем из массива только ту запись, которая нас интересует .
         }
         return false;
     }
@@ -80,7 +89,7 @@ class DB
 
         return (self::$conn->query($sql) === true);
     }
-
+/* Функция помогает найти ошибки */
     public function getError() {
         if (DEBUG_MODE) {
             return self::$conn->error;
@@ -90,3 +99,7 @@ class DB
         }
     }
 }
+
+/*
+self:: - когда хотим обратиться к классу а не к обьекту, как мы делаем через "this".
+*/
