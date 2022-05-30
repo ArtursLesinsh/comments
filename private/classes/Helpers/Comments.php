@@ -9,6 +9,7 @@ class Comments
     private $db_comments;
     public function __construct() {
         $this->db_comments = new DB('comments');
+/* $db_comments этот обьект будет доступен для всех методов в данной папке, и будет содержать new DB('comments'); */
     }
 
     public function getAll() {
@@ -90,3 +91,7 @@ class Comments
     }
 
 }
+
+/*
+return - мы его везде добовляем, заменяя в данном случае $output, чтобы все данные возращались в файл api.php и в браузер соответсвенно.
+ */

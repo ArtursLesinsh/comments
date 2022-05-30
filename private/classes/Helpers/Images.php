@@ -7,7 +7,12 @@ class Images
 {
     private $db_images;
     public function __construct() {
-        $this->db_images = new DB('images');
+        $this->db_images = new DB('images'); 
+        /*
+new DB('images'); - это класс, из которого мы сделали 2 обьекта:
+    new Images();
+    new Comments(); 
+        */
     }
 
     public function getAll() {
@@ -59,21 +64,27 @@ class Images
             'id' => $id
         ];
     }
-
+/* Функция для удаления картинки с экрана веб страницы */
     public function delete() {
         if (
             !isset($_POST['id']) || !is_string($_POST['id'])
+            /* если нет id или id не в текстовом формате */
         ) {
             return ['status' => false];
         }
 
         $id = (int) $_POST['id'];
-        $file_name = UPLOAD_DIR . "image_$id.png";
+        /* id должен быть обязателен числом */
+
+        $file_name = UPLOAD_DIR . "image_$id.png"; 
+        /* путь к папке с файлами */
+
         if (file_exists($file_name)) {
             unlink($file_name);
+            /* unlink - функция позволяющая удалить файл*/
         }
-
-        if (!$this->db_images->deleteEntry($id)){
+        /* из файла DB берём функцию deleteEntry и подаём на неё $id элемента, который хотим удалить */
+        if (!$this->db_images->deleteEntry($id)){// если это не правда
             return ['status' => false];
         }
 
