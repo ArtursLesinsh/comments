@@ -43,9 +43,16 @@
   </div>
 </div>
 
-<div class="popup">
+<!-- Форма где мы вводим изменения для коментария, поэтому мы внесли изменения в тэг form:
+action="api.php?object=comment&action=update"
+id="comments_update_form"
+<input type="hidden" name="id" /> - создан для того, чтобы мы могли отсеивать нам нужные комментарии по "id"
+Виден он не будет в браузере, только в консоле, в разделе "Elements"
+name="id" - selektors pec atributa.
+-->
+<div class="popup"> 
   <form action="api.php?object=comment&action=update" id="comments_update_form">
-    <input type="hidden" name="id" />
+    <input type="hidden" name="id" /> 
     <input type="text" name="author" placeholder="Name" required />
     <textarea
       name="message"

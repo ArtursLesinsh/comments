@@ -45,3 +45,17 @@ const xhttp = {
         xhttp.send();
     }
 };
+/*
+if (callback !== false) {// проверяем. не равен ли ответ "false " и он не будет равен false, 
+                            так как он будет равен функции, которая подаёт данные
+try {
+        let response_object = JSON.parse(this.responseText);
+        if (response_object.status == true) {
+            callback(response_object);
+- JSON.parse(this.responseText); - делаем формат (текст) понятным для JavaScript
+    }
+Здесь мы пытаемся получить ответ в JSON формате, и если не получается, ошибка будет, в любой линии, то вызовается:
+} catch (e) {  
+    console.log('invalid json');  
+}
+*/

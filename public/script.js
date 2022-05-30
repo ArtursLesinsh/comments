@@ -7,18 +7,7 @@ const comment_template = comment_block.querySelector('.template');
 const background_container = document.querySelector('.background_container');
 const image_template = background_container.querySelector('.template');
 
-// xhttp.get('api.php?object=comment&action=getAll', function (response) {
-//     for (let comment of response.comments) {
-//         addComment(comment.id, comment.author, comment.message);
-//     }
-// });
-
-// xhttp.get('api.php?object=image&action=getAll', function (response) {
-//     for (let image of response.images) {
-//         addBackgroundImage('endpoint.php?name=png&id=' + image.id);
-//     }
-// });
-
+/* здесь мы обьединили 2 цикла, которые выполняют одни и те-же действия, но на разных веб страниц */
 xhttp.get('api.php?object=batch&action=getAll', function (response) {
     for (let image of response.images) {
         addBackgroundImage('endpoint.php?name=png&id=' + image.id);
@@ -32,16 +21,20 @@ form.onsubmit = function (event) {
     event.preventDefault();
     submitForm(this);
 };
-
+/* Форма, что бы обновить данные для update (popup) формы */
 form_update.onsubmit = function (event) {
     event.preventDefault();
 
     xhttp.postForm(form_update, function (response) {
         popup.style.display = 'none';
+/* Здесь при отправке обнавленных данных, появляется стиль 'none' и popup исчезает */
 
-        const update_comment = document.querySelector('[data-id="' + response.id + '"]');
+        const update_comment = document.querySelector('[data-id="' + response.id + '"]');//
         update_comment.querySelector('.message').textContent = response.comment.message;
         update_comment.querySelector('.author').textContent = response.comment.author;
+/* Здесь при отправке обнавленных данных, обновляется содержимое HTML документа 
+data-id="' -это то, что есть у каждого коментария в разделе "Elements" и по нему мы обновляемя правильный коментарий
+[] отсеиваем все элементы по атрибутам */
     });
 }
 
@@ -76,12 +69,18 @@ function addComment(id, author, message) {
             form_update.querySelector('[name="id"]').value = response.comment.id;
             form_update.querySelector('[name="author"]').value = response.comment.author;
             form_update.querySelector('[name="message"]').value = response.comment.message;
+            /*
+form_update.querySelector - через этот атрибут находим конкретные элементы в файле HTML. 
+('[name="author"]') = input type="text" name="author" placeholder="Name" required 
+value = response.comment.author - здесь мы возрашаем уже то, что нам нужно.
+            */
         });
     };
 
     comment_block.append(new_comment);
 }
 
+/* Функция которая добовляет картинки к нашему фону*/
 function addBackgroundImage (src) {
     const new_image = image_template.cloneNode();
     new_image.classList.remove('template');
@@ -110,8 +109,23 @@ form.querySelector('textarea').onkeyup = function (event) {
     }
 };
 
+/* функция отвечающая за то, что нажимая на элемент popupб он пропадает */
 popup.onclick = function(event) {
     if (event.target == this) {
         this.style.display = 'none';
     }
+/* if (event.target == this)  
+event.target - содержит элемент, на котором сработало событие (клик к примеру);
+*/
 };
+
+/* Функция, чтобы картинки появлялись в веб-браузере на обоях
+
+xhttp.get('api.php?object=image&action=getAll', function (response) {
+    for (let image of response.images) {
+        addBackgroundImage('endpoint.php?name=png&id=' + image.id);
+'endpoint.php?name=png&id='- это путь к нашим файлам, если кто хочет обратиться только к ним, вписав в строку поиска имя файла на прямую.
+К примеру, чтобы можно было бы скинуть ссылку на картинку.
+    }
+});
+*/
