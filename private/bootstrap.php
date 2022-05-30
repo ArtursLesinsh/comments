@@ -2,7 +2,7 @@
 
 define('DEBUG_MODE', true);
 define('PRIVATE_DIR', __DIR__ . '/');
-define('UPLOAD_DIR', PRIVATE_DIR . 'uploads/');
+define('UPLOAD_DIR', PRIVATE_DIR . 'uploads/'); // показываем путь к папке с файлами
 
 define('DB_SERVER_NAME', 'localhost');
 define('DB_NAME', 'bootcamp');
